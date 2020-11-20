@@ -30,4 +30,4 @@ generated a total of 276 GB of data.
 
 These can be used as a template for making other similar runs. One will need to
 modify the paths in the scripts to point to a TECA install, and modify the MCF
-file to point to the desire3d HighResMIP dataset.
+file to point to the desired HighResMIP dataset.
