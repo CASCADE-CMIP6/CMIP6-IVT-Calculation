@@ -13,7 +13,7 @@ module swap PrgEnv-intel PrgEnv-gnu
 module use /global/cscratch1/sd/loring/teca_testing/deps/cf_reader_performance/modulefiles/
 module load teca/cf_reader_performance
 
-# print the commands aas the execute, and error out if any one command fails
+# print the commands as they execute, and error out if any one command fails
 set -e
 set -x
 
@@ -23,4 +23,5 @@ export HDF5_USE_FILE_LOCKING=FALSE
 
 # run the probe to determine number size of the dataset
 time srun -N 17 -n 1024 \
-    teca_metadata_probe --input_file HighResMIP_ECMWF_ECMWF-IFS-HR_highresSST-present_r1i1p1f1_6hrPlevPt.mcf
+    teca_metadata_probe --z_axis_variable plev \
+        --input_file HighResMIP_ECMWF_ECMWF-IFS-HR_highresSST-present_r1i1p1f1_6hrPlevPt.mcf
