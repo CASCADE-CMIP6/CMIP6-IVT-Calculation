@@ -6,20 +6,16 @@
 #SBATCH -A m1517
 #SBATCH -J 2_IVT_calculation
 
+# load gcc
 module swap PrgEnv-intel PrgEnv-gnu
 
-# bring a TECA install into your environment
-# change the following paths to point to your TECA install
-module use /global/cscratch1/sd/loring/teca_testing/deps/cf_reader_performance/modulefiles/
-module load teca/cf_reader_performance
+# bring a TECA install into your environment.
+module use /global/cscratch1/sd/loring/teca_testing/installs/develop/modulefiles
+module load teca
 
 # print the commands aas the execute, and error out if any one command fails
 set -e
 set -x
-
-# configure HDF5 file locking if on Cori (CFS)community file system
-# This is not needed on Cori Lustre scratch file system
-export HDF5_USE_FILE_LOCKING=FALSE
 
 # make a directory for the output files
 out_dir=HighResMIP_ECMWF_ECMWF-IFS-HR_highresSST-present_r1i1p1f1_6hrPlevPt/ivt_all
@@ -34,5 +30,3 @@ time srun -N 1484 -n 23744 \
         --specific_humidity hus --wind_u ua --wind_v va --ivt_u ivt_u --ivt_v ivt_v --ivt ivt \
         --write_ivt 1 --write_ivt_magnitude 1 --steps_per_file 128 \
         --output_file ${out_dir}/ivt_%t%.nc
-
-
